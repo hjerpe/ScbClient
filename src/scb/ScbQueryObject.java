@@ -3,7 +3,8 @@ package scb;
 import javax.json.*;
 
 /**
- * Class holding data for requesting the Statistics Sweden Agency (SCB)
+ * Class holding an URL and a query used request data from the Statistics 
+ * Sweden Agency (SCB) AP..
  * @author Adam Hjerpe
  * @version 1.0
  * @since 2016-12-12
