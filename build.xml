@@ -1,4 +1,4 @@
-<project name="ScbQueryObject" basedir="." default="">
+<project name="ScbQueryObjects" basedir="." default="">
 
     <property name="src.dir" value="src"/>
 

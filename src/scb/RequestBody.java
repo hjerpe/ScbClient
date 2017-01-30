@@ -8,6 +8,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+
 import javax.json.*;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -17,11 +18,8 @@ import java.util.HashMap;
  * Class that connects to the Statistics Sweden Agency (SCB) and
  * which holds the response body by a list of column names, column types,
  * and the associated values.
- * @author Adam Hjerpe
- * @version 1.0
- * @since 2016-12-12
  */
-class ScbRequestBody {
+class RequestBody {
 
     private String datasetName;
     private String title;
@@ -38,7 +36,7 @@ class ScbRequestBody {
      * @param scbQueryObject Object holding the table url and JsonObject query specifying
      *                       what data to query SCB by a POST request.
      */
-    public ScbRequestBody(ScbQueryObject scbQueryObject) {
+    public <T extends ScbQueryObjects> RequestBody(T scbQueryObject) {
         JsonObject jsonResponse = this.responseBody(scbQueryObject);
         JsonArray jsonColumns = jsonResponse.getJsonArray("columns");
 
@@ -114,14 +112,14 @@ class ScbRequestBody {
     /**
      * @return The latest time observation for the queried data.
      */
-    public String getLatestTimeObservation() { return this.latestTimeObservation; }
+    public <T extends ScbQueryObjects> String getLatestTimeObservation() { return this.latestTimeObservation; }
 
     /**
      * Returns the last observation time at SCB for the given table specified by the scbQuery.
      * @param scbQuery Holds the URL to the table and a query which specifies what data to request.
      * @return A string denoting the last time observation.
      */
-    private String getLatestTimeObservation(ScbQueryObject scbQuery) {
+    private <T extends ScbQueryObjects> String getLatestTimeObservation(T scbQuery) {
         JsonObject metadata = getMetadata(scbQuery);
         JsonArray variables = metadata.getJsonArray("variables");
 
@@ -136,7 +134,7 @@ class ScbRequestBody {
         return null;
     }
 
-    private JsonObject getMetadata(ScbQueryObject scbQuery) {
+    private <T extends ScbQueryObjects> JsonObject getMetadata(T scbQuery) {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         try {
             // Connect to SCB and send a GET request
@@ -157,7 +155,7 @@ class ScbRequestBody {
         return null;
     }
 
-    private String getDatasetTitle(ScbQueryObject scbQueryObject) {
+    private <T extends ScbQueryObjects> String getDatasetTitle(T scbQueryObject) {
         JsonObject metadata = getMetadata(scbQueryObject);
         // If metadata is null the program should crash
         return metadata.getString("title");
@@ -174,7 +172,7 @@ class ScbRequestBody {
      * the text field with type not equal to 'c' and the dimension for the values are specified by
      * the text field with type = 'c'
      */
-    private JsonObject responseBody(ScbQueryObject scbQuery) {
+    private <T extends ScbQueryObjects> JsonObject responseBody(T scbQuery) {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         try {
             HttpPost request = new HttpPost(scbQuery.getUrl());
