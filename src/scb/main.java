@@ -9,6 +9,6 @@ public class main {
         }
 
         RequestBody req = new RequestBody(
-                QueryObjectsPriceIndices.ByProductProducerPriceIndex);
+                QueryObjectsPriceIndices.ProducerPriceIndex);
     }
 }

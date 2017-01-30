@@ -5,29 +5,29 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 
 public enum QueryObjectsPriceIndices implements ScbQueryObjects {
-    ByProductImportPriceIndex(
+    ImportPriceIndex(
             "http://api.scb.se/OV0104/v1/doris/en/ssd/START/PR/PR0301/PR0301B/IMPIM07",
             jsonTemplate(arrayBuilderWithDefaultValues())
     ),
-    ByProductExportPriceIndex(
+    ExportPriceIndex(
             "http://api.scb.se/OV0104/v1/doris/en/ssd/START/PR/PR0301/PR0301B/EXPIM07",
             jsonTemplate(arrayBuilderWithDefaultValues())
     ),
 
-    ByProductHomeSalesProducerPriceIndex(
+    HomeSalesProducerPriceIndex(
             "http://api.scb.se/OV0104/v1/doris/en/ssd/START/PR/PR0301/PR0301B/HMPIM07",
             jsonTemplate(arrayBuilderWithDefaultValues())
     ),
-    ByProductProducerPriceIndex(
+    ProducerPriceIndex(
             "http://api.scb.se/OV0104/v1/doris/en/ssd/START/PR/PR0301/PR0301B/PPIM07",
             jsonTemplate(arrayBuilderWithDefaultValues())
     ),
 
-    ByProductDomesticSupplyPriceIndex(
+    DomesticSupplyPriceIndex(
             "http://api.scb.se/OV0104/v1/doris/en/ssd/START/PR/PR0301/PR0301B/ITPIM07",
             jsonTemplate(arrayBuilderWithDefaultValues())
     ),
-    ByProductServicesProducerPriceIndex(
+    ServicesProducerPriceIndex(
             "http://api.scb.se/OV0104/v1/doris/en/ssd/START/PR/PR0301/PR0301B/TPI2005Kv07",
             jsonTemplate(
                     Json.createArrayBuilder().
